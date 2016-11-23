@@ -33,7 +33,9 @@
         {% for game in games %}
           <tr>
           <th>
-            {{ game.start | date:"%l:%M %p" }}
+            <time datetime="{{ game.start }}">
+              {{ game.start | date:"%l:%M %p" }}
+            </time>
           </th>
           <td>
             {{ site.data.teams[game.away].name }}

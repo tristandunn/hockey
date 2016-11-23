@@ -12,6 +12,20 @@
                1520751600000, 1541311200000, 1552201200000, 1572760800000,
                1583650800000, 1604210400000, null],
 
+    formatDate: function(date) {
+      return new Intl.DateTimeFormat(undefined, {
+        month : "long",
+        day   : "numeric"
+      }).format(date);
+    },
+
+    formatTime: function(time) {
+      return new Intl.DateTimeFormat(undefined, {
+        hour   : "numeric",
+        minute : "numeric"
+      }).format(time);
+    },
+
     offset: function() {
       var target  = Date.now(),
           untils  = this.UNTILS,
@@ -46,7 +60,8 @@
   var now      = new Date(),
       hours    = now.getUTCHours(),
       offset   = Time.offset(),
-      sections = Array.prototype.slice.call(document.querySelectorAll("section"));
+      slice    = Array.prototype.slice,
+      sections = slice.call(document.querySelectorAll("section"));
 
   if (hours <= offset) {
     now.setUTCHours(hours - offset);
@@ -69,6 +84,20 @@
              parseInt(parts[2]) >= day;
     })
     .slice(0, 7).forEach(function(section, index) {
+      if (window.Intl && window.Intl.DateTimeFormat) {
+        var date = section.querySelector("h1 time");
+
+        date.innerText = Time.formatDate(
+          new Date(date.getAttribute("datetime"))
+        );
+
+        slice.call(section.querySelectorAll("th time")).forEach(function(time) {
+          time.textContent = Time.formatTime(
+            new Date(time.getAttribute("datetime"))
+          );
+        });
+      }
+
       section.classList.add("week");
     });
 })();
