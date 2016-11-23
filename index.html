@@ -33,7 +33,7 @@
         {% for game in games %}
           <tr>
           <th>
-            <time datetime="{{ game.start }}">
+            <time datetime="{{ game.start | date: "%FT%T%:z" }}">
               {{ game.start | date:"%l:%M %p" }}
             </time>
           </th>
