@@ -64,7 +64,7 @@
       sections = slice.call(document.querySelectorAll("section"));
 
   if (navigator.platform.match(/Win/)) {
-    document.querySelector("header h1").innerHTML = "Hockey";
+    document.querySelector("header h1 a").innerHTML = "Hockey";
   }
 
   if (hours < offset) {
@@ -73,7 +73,9 @@
 
   var year  = now.getUTCFullYear(),
       month = now.getUTCMonth() + 1,
-      day   = now.getUTCDate();
+      day   = now.getUTCDate(),
+      limit = 7,
+      count = 1;
 
   sections.forEach(function(section) {
     section.classList.remove("week");
@@ -90,7 +92,15 @@
              (sectionYear >= year && sectionMonth  > month) ||
              (sectionYear >= year && sectionMonth >= month && sectionDay >= day);
     })
-    .slice(0, 7).forEach(function(section, index) {
+    .forEach(function(section, index) {
+      if (!section.querySelector("tr")) {
+        return;
+      } else if (count > limit && window.location.pathname === "/hockey/") {
+        return;
+      }
+
+      count++;
+
       if (window.Intl && window.Intl.DateTimeFormat) {
         var time = section.querySelector("h1 time");
 

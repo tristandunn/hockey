@@ -1,6 +1,3 @@
----
----
-
 <main>
   {% for object in site.data.games %}
     {% assign games = object[1] | sortBy:"start" %}
@@ -27,6 +24,13 @@
 
       <table>
         {% for game in games %}
+          {% if include.id %}
+            {% if include.id == game.away or include.id == game.home %}
+            {% else %}
+              {% continue %}
+            {% endif %}
+          {% endif %}
+
           <tr>
           <th>
             <time datetime="{{ game.start | date: "%FT%T%:z" }}">
@@ -34,12 +38,15 @@
             </time>
           </th>
           <td>
-            {% assign away_name = site.data.teams[game.away].name %}
-            {% assign home_name = site.data.teams[game.home].name %}
+            {% if include.id == game.away %}
+              {% assign home_name = site.data.teams[game.home].name %}
 
-            <a href="{{ site.baseurl }}/{{ away_name | downcase | replace:" ","-" }}/">{{ away_name }}</a>
-            <span>@</span>
-            <a href="{{ site.baseurl }}/{{ home_name | downcase | replace:" ","-" }}/">{{ home_name }}</a>
+              <span>@</span> <a href="{{ site.baseurl }}/{{ home_name | downcase | replace:" ","-" }}/">{{ home_name }}</a>
+            {% else %}
+              {% assign away_name = site.data.teams[game.away].name %}
+
+              <a href="{{ site.baseurl }}/{{ away_name | downcase | replace:" ","-" }}/">{{ away_name }}</a>
+            {% endif %}
           </td>
           </tr>
         {% endfor %}

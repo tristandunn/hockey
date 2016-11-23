@@ -1,3 +1,5 @@
+baseurl: "/hockey"
+
 compress_html:
   clippings: all
 

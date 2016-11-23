@@ -3,7 +3,7 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Hockey</title>
+  <title>{% if page.title %}{{ page.title }} {% endif %}Hockey</title>
 
   {% capture css %}
     {% include css/colors.scss %}
@@ -14,3 +14,7 @@
   <style type="text/css">{{ css | scssify }}</style>
 </head>
 <body>
+
+<header>
+  <h1><a href="{{ site.baseurl }}/">&#127954;</a></h1>
+</header>

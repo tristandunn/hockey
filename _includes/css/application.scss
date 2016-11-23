@@ -28,8 +28,13 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+a {
+  color: $black;
+  text-decoration: none;
+}
+
 header {
-  padding: 4vw;
+  padding: 4vw 4vw 0;
 
   h1 {
     font-size: 9vw;
@@ -46,10 +51,10 @@ section {
 
   &.week {
     display: block;
+  }
 
-    + .week {
-      padding-top: 6vw;
-    }
+  + section {
+    padding-top: 6vw;
   }
 
   h1 {
@@ -74,6 +79,10 @@ section {
   td {
     padding: 0 0 0 2vw;
     font-weight: 800;
+
+    a:hover {
+      color: $blue;
+    }
 
     span {
       font-weight: 300;
