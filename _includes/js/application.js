@@ -81,16 +81,15 @@
 
       return parseInt(parts[0]) >= year &&
              parseInt(parts[1]) >= month &&
-             parseInt(parts[2]) >= day;
+             parseInt(parts[2].split("T")[0]) >= day;
     })
     .slice(0, 7).forEach(function(section, index) {
       if (window.Intl && window.Intl.DateTimeFormat) {
-        var date = new Date(now),
-            time = section.querySelector("h1 time");
+        var time = section.querySelector("h1 time");
 
-        date.setDate(date.getDate() + index);
-
-        time.innerText = Time.formatDate(date);
+        time.innerText = Time.formatDate(
+          new Date(time.getAttribute("datetime"))
+        );
 
         slice.call(section.querySelectorAll("th time")).forEach(function(time) {
           time.textContent = Time.formatTime(

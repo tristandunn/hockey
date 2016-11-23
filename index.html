@@ -7,14 +7,14 @@
 
 <main>
   {% for object in site.data.games %}
-    {% assign date  = object[0] %}
     {% assign games = object[1] | sortBy:"start" %}
+    {% assign date  = games[0].start %}
 
     <section>
       {% assign day = date | date: "%-d" %}
 
       <h1>
-        <time datetime="{{ date }}">
+        <time datetime="{{ date | date: "%FT%T%:z" }}">
           {{ date | date: "%B" }}
           {% case day %}
             {% when "1" or "21" or "31" %}
