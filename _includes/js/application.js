@@ -81,11 +81,14 @@
 
   sections
     .filter(function(section) {
-      var parts = section.querySelector("h1 time").getAttribute("datetime").split("-");
+      var parts        = section.querySelector("h1 time").getAttribute("datetime").split("-"),
+          sectionYear  = parseInt(parts[0], 10),
+          sectionMonth = parseInt(parts[1], 10),
+          sectionDay   = parseInt(parts[2].split("T")[0], 10);
 
-      return parseInt(parts[0]) >= year &&
-             parseInt(parts[1]) >= month &&
-             parseInt(parts[2].split("T")[0]) >= day;
+      return (sectionYear  > year) ||
+             (sectionYear >= year && sectionMonth  > month) ||
+             (sectionYear >= year && sectionMonth >= month && sectionDay >= day);
     })
     .slice(0, 7).forEach(function(section, index) {
       if (window.Intl && window.Intl.DateTimeFormat) {
