@@ -85,11 +85,12 @@
     })
     .slice(0, 7).forEach(function(section, index) {
       if (window.Intl && window.Intl.DateTimeFormat) {
-        var date = section.querySelector("h1 time");
+        var date = new Date(now),
+            time = section.querySelector("h1 time");
 
-        date.innerText = Time.formatDate(
-          new Date(date.getAttribute("datetime"))
-        );
+        date.setDate(date.getDate() + index);
+
+        time.innerText = Time.formatDate(date);
 
         slice.call(section.querySelectorAll("th time")).forEach(function(time) {
           time.textContent = Time.formatTime(
