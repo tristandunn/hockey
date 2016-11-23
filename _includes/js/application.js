@@ -59,9 +59,13 @@
 
   var now      = new Date(),
       hours    = now.getUTCHours(),
-      offset   = Time.offset(),
       slice    = Array.prototype.slice,
+      offset   = Time.offset(),
       sections = slice.call(document.querySelectorAll("section"));
+
+  if (navigator.platform.match(/Win/)) {
+    document.querySelector("header h1").innerHTML = "Hockey";
+  }
 
   if (hours < offset) {
     now.setUTCHours(hours - offset);
