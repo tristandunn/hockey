@@ -63,7 +63,7 @@
       slice    = Array.prototype.slice,
       sections = slice.call(document.querySelectorAll("section"));
 
-  if (hours <= offset) {
+  if (hours < offset) {
     now.setUTCHours(hours - offset);
   }
 
