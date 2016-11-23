@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Hockey</title>
+
+  {% capture css %}
+    {% include css/colors.scss %}
+    {% include css/reset.scss %}
+    {% include css/application.scss %}
+  {% endcapture %}
+
+  <style type="text/css">{{ css | scssify }}</style>
+</head>
+<body>

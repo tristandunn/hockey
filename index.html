@@ -1,0 +1,46 @@
+---
+---
+
+<header>
+  <h1>🏒</h1>
+</header>
+
+<main>
+  {% for object in site.data.games %}
+    {% assign date  = object[0] %}
+    {% assign games = object[1] | sortBy:"start" %}
+
+    <section>
+      {% assign day = date | date: "%-d" %}
+
+      <h1>
+        {{ date | date: "%B" }}
+        {% case day %}
+          {% when "1" or "21" or "31" %}
+            {{ day }}st
+          {% when "2" or "22" %}
+            {{ day }}nd
+          {% when "3" or "23" %}
+            {{ day }}rd
+          {% else %}
+            {{ day }}th
+        {% endcase %}
+      </h1>
+
+      <table>
+        {% for game in games %}
+          <tr>
+          <th>
+            {{ game.start | date:"%l:%M %p" }}
+          </th>
+          <td>
+            {{ site.data.teams[game.away].name }}
+            <span>versus</span>
+            {{ site.data.teams[game.home].name }}
+          </td>
+          </tr>
+        {% endfor %}
+      </table>
+    </section>
+  {% endfor %}
+</main>

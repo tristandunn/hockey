@@ -1,0 +1,69 @@
+scss_files: "_includes/css/**/*.scss"
+
+linters:
+  HexLength:
+    enabled: true
+    style: short
+
+  HexNotation:
+    enabled: true
+    style: uppercase
+
+  LeadingZero:
+    enabled: true
+    style: include_zero
+
+  NestingDepth:
+    enabled: true
+    max_depth: 4
+    ignore_parent_selectors: false
+
+  PropertySortOrder:
+    enabled: true
+    exclude:
+      - "_includes/css/reset.scss"
+    order:
+      - position
+      - top
+      - right
+      - bottom
+      - left
+      - background
+      - background-size
+      - color
+      - width
+      - height
+      - margin
+      - padding
+      - padding-top
+      - padding-right
+      - padding-bottom
+      - padding-left
+      - border
+      - border-color
+      - border-top
+      - border-right
+      - border-bottom
+      - border-left
+      - border-radius
+      - font
+      - font-size
+      - font-weight
+      - font-style
+      - line-height
+      - letter-spacing
+      - text-align
+      - text-decoration
+      - text-transform
+      - display
+      - float
+      - opacity
+
+  SingleLinePerSelector:
+    enabled: true
+    exclude:
+      - "_includes/css/reset.scss"
+
+  StringQuotes:
+    enabled: true
+    style: double_quotes

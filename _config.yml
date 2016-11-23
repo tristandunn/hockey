@@ -1,0 +1,16 @@
+compress_html:
+  clippings: all
+
+defaults:
+  -
+    scope:
+      type: "pages"
+    values:
+      layout: "default"
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+
+sass:
+    style: compressed
