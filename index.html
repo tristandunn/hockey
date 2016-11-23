@@ -14,17 +14,19 @@
       {% assign day = date | date: "%-d" %}
 
       <h1>
-        {{ date | date: "%B" }}
-        {% case day %}
-          {% when "1" or "21" or "31" %}
-            {{ day }}st
-          {% when "2" or "22" %}
-            {{ day }}nd
-          {% when "3" or "23" %}
-            {{ day }}rd
-          {% else %}
-            {{ day }}th
-        {% endcase %}
+        <time datetime="{{ date }}">
+          {{ date | date: "%B" }}
+          {% case day %}
+            {% when "1" or "21" or "31" %}
+              {{ day }}st
+            {% when "2" or "22" %}
+              {{ day }}nd
+            {% when "3" or "23" %}
+              {{ day }}rd
+            {% else %}
+              {{ day }}th
+          {% endcase %}
+        </time>
       </h1>
 
       <table>

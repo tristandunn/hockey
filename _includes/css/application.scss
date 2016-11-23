@@ -42,10 +42,14 @@ main {
 }
 
 section {
-  padding: 2vw 0;
+  display: none;
 
-  + section {
-    padding-top: 4vw;
+  &.week {
+    display: block;
+
+    + .week {
+      padding-top: 6vw;
+    }
   }
 
   h1 {
