@@ -89,3 +89,35 @@ section {
     }
   }
 }
+
+footer {
+  padding: 4vw;
+  text-align: center;
+
+  a {
+    color: $black;
+    border-bottom: 0.1rem solid $gray;
+
+    &:hover {
+      color: $blue;
+      border-color: $blue;
+    }
+  }
+
+  p {
+    font-size: 0.8rem;
+    line-height: 2.25;
+
+    + p {
+      &,
+      a {
+        color: $gray;
+        border-color: $silver;
+      }
+
+      + p {
+        color: $silver;
+      }
+    }
+  }
+}
