@@ -8,4 +8,3 @@ rvm:
 script:
   - bundle exec jekyll build
   - bundle exec scss-lint
-  - bundle exec htmlproofer ./_site --check-html true --log-level debug
