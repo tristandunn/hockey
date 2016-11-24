@@ -13,6 +13,8 @@ defaults:
 exclude:
   - Gemfile
   - Gemfile.lock
+  - LICENSE
+  - README.markdown
   - vendor
 
 sass:
