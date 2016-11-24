@@ -41,11 +41,11 @@
             {% if include.id == game.away %}
               {% assign home_name = site.data.teams[game.home].name %}
 
-              <span>@</span> <a href="{{ site.baseurl }}/{{ home_name | downcase | replace:" ","-" }}/">{{ home_name }}</a>
+              <span>@</span> <a href="{{ site.baseurl }}/{{ home_name | slugify }}/">{{ home_name }}</a>
             {% else %}
               {% assign away_name = site.data.teams[game.away].name %}
 
-              <a href="{{ site.baseurl }}/{{ away_name | downcase | replace:" ","-" }}/">{{ away_name }}</a>
+              <a href="{{ site.baseurl }}/{{ away_name | slugify }}/">{{ away_name }}</a>
             {% endif %}
           </td>
           </tr>
