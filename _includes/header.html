@@ -3,6 +3,20 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  {% if page.title %}
+    <meta name="description" content="Upcoming hockey games for the {{ page.title }}.">
+  {% else %}
+    <meta name="description" content="Upcoming hockey games.">
+  {% endif %}
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{% if page.title %}{{ page.title }} {% endif %}Hockey">
+  {% if page.title %}
+    <meta property="og:description" content="Upcoming hockey games for the {{ page.title }}.">
+  {% else %}
+    <meta property="og:description" name="description" content="Upcoming hockey games.">
+  {% endif %}
+
   <title>{% if page.title %}{{ page.title }} {% endif %}Hockey</title>
 
   {% capture css %}
