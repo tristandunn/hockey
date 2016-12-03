@@ -37,8 +37,12 @@ header {
   padding: 4vw 4vw 0;
 
   h1 {
-    font-size: 9vw;
+    font-size: 7vw;
     text-align: center;
+
+    @media (min-width: 1024px) {
+      font-size: 125px;
+    }
   }
 }
 
