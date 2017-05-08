@@ -109,9 +109,9 @@
         );
 
         slice.call(section.querySelectorAll("th time")).forEach(function(time) {
-          time.textContent = Time.formatTime(
-            new Date(time.getAttribute("datetime"))
-          );
+          var date = new Date(time.getAttribute("datetime"));
+
+          time.textContent = date.getHours() === 3 ? "TBD" : Time.formatTime(date);
         });
       }
 
