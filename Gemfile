@@ -4,5 +4,5 @@ source "https://rubygems.org"
 gem "github-pages"
 
 group :test do
-  gem "scss_lint", "0.50.3", require: false
+  gem "scss_lint", "0.53.0", require: false
 end
