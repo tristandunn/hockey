@@ -14,8 +14,9 @@
 
     formatDate: function(date) {
       return new Intl.DateTimeFormat(undefined, {
-        month : "long",
-        day   : "numeric"
+        month  : "long",
+        day    : "numeric",
+        weekday: "long"
       }).format(date);
     },
 
