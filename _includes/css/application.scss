@@ -53,8 +53,14 @@ main {
 section {
   display: none;
 
-  &.week {
+  &.week,
+  &.empty {
     display: block;
+  }
+
+  &.empty {
+    padding-top: 6vw;
+    text-align: center;
   }
 
   + section {
