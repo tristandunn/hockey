@@ -14,9 +14,9 @@
 
     formatDate: function(date) {
       return new Intl.DateTimeFormat(undefined, {
-        month  : "long",
-        day    : "numeric",
-        weekday: "long"
+        month   : "long",
+        day     : "numeric",
+        weekday : "long"
       }).format(date);
     },
 
@@ -89,8 +89,8 @@
           sectionMonth = parseInt(parts[1], 10),
           sectionDay   = parseInt(parts[2].split("T")[0], 10);
 
-      return (sectionYear  > year) ||
-             (sectionYear >= year && sectionMonth  > month) ||
+      return (sectionYear >  year) ||
+             (sectionYear >= year && sectionMonth >  month) ||
              (sectionYear >= year && sectionMonth >= month && sectionDay >= day);
     })
     .forEach(function(section, index) {
@@ -103,11 +103,19 @@
       count++;
 
       if (window.Intl && window.Intl.DateTimeFormat) {
-        var time = section.querySelector("h1 time");
+        var time         = section.querySelector("h1 time");
+            parts        = time.getAttribute("datetime").split("-"),
+            sectionYear  = parseInt(parts[0], 10),
+            sectionMonth = parseInt(parts[1], 10),
+            sectionDay   = parseInt(parts[2].split("T")[0], 10);
 
-        time.innerText = Time.formatDate(
-          new Date(time.getAttribute("datetime"))
-        );
+        if (sectionYear === year && sectionMonth === month && sectionDay === day) {
+          time.innerText = "Today";
+        } else {
+          time.innerText = Time.formatDate(
+            new Date(time.getAttribute("datetime"))
+          );
+        }
 
         slice.call(section.querySelectorAll("th time")).forEach(function(time) {
           var date = new Date(time.getAttribute("datetime"));
