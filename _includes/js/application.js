@@ -120,7 +120,7 @@
         slice.call(section.querySelectorAll("th time")).forEach(function(time) {
           var date = new Date(time.getAttribute("datetime"));
 
-          time.textContent = date.getHours() === 3 ? "TBD" : Time.formatTime(date);
+          time.textContent = Time.formatTime(date);
         });
       }
 
