@@ -33,9 +33,13 @@
 
           <tr>
           <th>
-            <time datetime="{{ game.start | date: "%FT%T%:z" }}">
-              {{ game.start | date:"%l:%M %p" }}
-            </time>
+            {% if game.start contains "03:00:00 -0400" or game.start contains "02:00:00 -0400" or game.start contains "01:00:00 -0400" %}
+              TBD
+            {% else %}
+              <time datetime="{{ game.start | date: "%FT%T%:z" }}">
+                {{ game.start | date:"%l:%M %p" }}
+              </time>
+            {% endif %}
           </th>
           <td>
             {% if include.id == game.away %}
