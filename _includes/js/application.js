@@ -59,6 +59,7 @@
 
 
   var now      = new Date(),
+      empty    = document.querySelector(".empty"),
       hours    = now.getUTCHours(),
       slice    = Array.prototype.slice,
       offset   = Time.offset(),
@@ -82,50 +83,79 @@
     section.classList.remove("week");
   });
 
-  sections
-    .filter(function(section) {
-      var parts        = section.querySelector("h1 time").getAttribute("datetime").split("-"),
+  var activeSections = sections.filter(function(section) {
+    if (!section) {
+      return false;
+    }
+
+    var time = section.querySelector("h1 time");
+
+    if (!time) {
+      return false;
+    }
+
+    var parts        = time.getAttribute("datetime").split("-"),
+        sectionYear  = parseInt(parts[0], 10),
+        sectionMonth = parseInt(parts[1], 10),
+        sectionDay   = parseInt(parts[2].split("T")[0], 10);
+
+    return (sectionYear >  year) ||
+           (sectionYear >= year && sectionMonth >  month) ||
+           (sectionYear >= year && sectionMonth >= month && sectionDay >= day);
+  });
+
+  if (activeSections.length === 0) {
+    var header     = empty.querySelector("h1"),
+        relative   = new Intl.RelativeTimeFormat({ style: "narrow" }),
+        difference = Math.round(
+          (new Date(Date.UTC(2019, 9, 04, 0, 0, 0)).getTime() - Date.now()) /
+          1000 / 60 / 60 / 24
+        );
+
+    header.innerText = "Hockey " + relative.format(difference, "day") + ".";
+
+    empty.classList.remove("hidden");
+
+    return;
+  } else {
+    empty.remove();
+  }
+
+  activeSections.forEach(function(section, index) {
+    if (!section.querySelector("tr")) {
+      return;
+    } else if (count > limit && window.location.pathname === "/hockey/") {
+      return;
+    }
+
+    count++;
+
+    if (window.Intl && window.Intl.DateTimeFormat) {
+      var time         = section.querySelector("h1 time");
+          parts        = time.getAttribute("datetime").split("-"),
           sectionYear  = parseInt(parts[0], 10),
           sectionMonth = parseInt(parts[1], 10),
           sectionDay   = parseInt(parts[2].split("T")[0], 10);
 
-      return (sectionYear >  year) ||
-             (sectionYear >= year && sectionMonth >  month) ||
-             (sectionYear >= year && sectionMonth >= month && sectionDay >= day);
-    })
-    .forEach(function(section, index) {
-      if (!section.querySelector("tr")) {
-        return;
-      } else if (count > limit && window.location.pathname === "/hockey/") {
-        return;
+      if (sectionYear === year && sectionMonth === month && sectionDay === day) {
+        time.innerText = "Today";
+      } else {
+        time.innerText = Time.formatDate(
+          new Date(time.getAttribute("datetime"))
+        );
       }
 
-      count++;
+      slice.call(section.querySelectorAll("th time")).forEach(function(time) {
+        var date = new Date(time.getAttribute("datetime"));
 
-      if (window.Intl && window.Intl.DateTimeFormat) {
-        var time         = section.querySelector("h1 time");
-            parts        = time.getAttribute("datetime").split("-"),
-            sectionYear  = parseInt(parts[0], 10),
-            sectionMonth = parseInt(parts[1], 10),
-            sectionDay   = parseInt(parts[2].split("T")[0], 10);
+        time.textContent = Time.formatTime(date);
+      });
+    }
 
-        if (sectionYear === year && sectionMonth === month && sectionDay === day) {
-          time.innerText = "Today";
-        } else {
-          time.innerText = Time.formatDate(
-            new Date(time.getAttribute("datetime"))
-          );
-        }
+    section.classList.add("week");
+  });
 
-        slice.call(section.querySelectorAll("th time")).forEach(function(time) {
-          var date = new Date(time.getAttribute("datetime"));
 
-          time.textContent = Time.formatTime(date);
-        });
-      }
-
-      section.classList.add("week");
-    });
 
 
   window.addEventListener("load", function(e) {

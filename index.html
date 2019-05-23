@@ -2,11 +2,9 @@
 ---
 
 <main>
-  {% if site.data.games.size == 0 %}
-    <section class="empty">
-      <h1>No games scheduled&#8230;</h1>
-    </section>
-  {% endif %}
+  <section class="empty hidden">
+    <h1>No games scheduled&#8230;</h1>
+  </section>
 
   {% for object in site.data.games %}
     {% assign games = object[1] | sortBy:"start" %}
