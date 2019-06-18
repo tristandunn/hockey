@@ -106,13 +106,17 @@
 
   if (activeSections.length === 0) {
     var header     = empty.querySelector("h1"),
-        relative   = new Intl.RelativeTimeFormat({ style: "narrow" }),
         difference = Math.round(
           (new Date(Date.UTC(2019, 9, 04, 0, 0, 0)).getTime() - Date.now()) /
           1000 / 60 / 60 / 24
-        );
+        ),
+        duration   = "in " + difference + " days";
 
-    header.innerText = "Hockey " + relative.format(difference, "day") + ".";
+    if (Intl.RelativeTimeFormat) {
+      duration = new Intl.RelativeTimeFormat({ style: "narrow" }).format(difference, "day");
+    }
+
+    header.innerText = "Hockey " + duration + ".";
 
     empty.classList.remove("hidden");
 
