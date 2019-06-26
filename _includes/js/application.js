@@ -121,8 +121,8 @@
     empty.classList.remove("hidden");
 
     return;
-  } else {
-    empty.remove();
+  } else if (empty) {
+    empty.parentNode.removeChild(empty);
   }
 
   activeSections.forEach(function(section, index) {
