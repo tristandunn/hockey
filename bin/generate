@@ -2,15 +2,30 @@
 
 # frozen_string_literal: true
 
+require "action_view"
 require "./lib/game"
 require "./lib/schedule"
 
+module Helpers
+  extend ActionView::Helpers::NumberHelper
+end
+
 schedule = Schedule.new(zone: "Eastern Time (US & Canada)")
+
+day_count  = schedule.games.size
+game_count = Helpers.number_with_delimiter(schedule.games.values.flatten.size)
+team_count = schedule.teams.size
+
+puts "Fetching games between #{schedule.start_date} and #{schedule.end_date}..."
+puts "Found #{game_count} games over #{day_count} days for #{team_count} teams."
+puts "Writing data..."
 
 FileUtils.mkdir_p("./_data")
 
 File.write("./_data/games.json", JSON.dump(schedule.as_json))
 File.write("./_data/teams.json", JSON.dump(schedule.teams))
+
+puts "Generating team templates..."
 
 schedule.teams.each do |id, team|
   slug = team[:name].downcase.tr(" ", "-")

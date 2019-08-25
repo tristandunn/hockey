@@ -15,6 +15,22 @@ class Schedule
     Time.zone = zone
   end
 
+  # Determine the ending date to query for.
+  #
+  # If the month is at or beyond the delimiter month, July, then end the
+  # following year on June 30th. Otherwise end on June 30th in the current
+  # year.
+  #
+  # @return [Date]
+  def end_date
+    day   = Time.zone.today
+    year  = day.year
+    year += 1 if day.month >= DELIMITER_MONTH
+
+    time = Time.zone.local(year, DELIMITER_MONTH, 1) - 1.day
+    time.to_date
+  end
+
   # Return all the valid games on the schedule, grouped by date.
   #
   # @return [Hash]
@@ -24,6 +40,13 @@ class Schedule
         Game.new(game)
       end
     end.select(&:valid?).group_by(&:date)
+  end
+
+  # Determine the starting date to query for.
+  #
+  # @return [Date]
+  def start_date
+    Date.current
   end
 
   # Return the unique teams, sorted by their ID.
@@ -56,23 +79,9 @@ class Schedule
   #
   # @return [Hash]
   def dates
-    @dates ||= JSON.parse(uri.read).dig("dates")
-  end
-
-  # Determine the ending date to query for.
-  #
-  # If the month is at or beyond the delimiter month, July, then end the
-  # following year on June 30th. Otherwise end on June 30th in the current
-  # year.
-  #
-  # @return [Date]
-  def end_date
-    day   = Time.zone.today
-    year  = day.year
-    year += 1 if day.month >= DELIMITER_MONTH
-
-    time = Time.zone.local(year, DELIMITER_MONTH, 1) - 1.day
-    time.to_date
+    @dates ||= begin
+                 JSON.parse(uri.read).dig("dates")
+               end
   end
 
   # Build the request query.
@@ -84,13 +93,6 @@ class Schedule
       endDate:   end_date,
       startDate: start_date
     }.to_query
-  end
-
-  # Determine the starting date to query for.
-  #
-  # @return [Date]
-  def start_date
-    Date.current
   end
 
   # Generate a schedule URI with the dynamic query parameters.
