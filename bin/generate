@@ -1,0 +1,31 @@
+#!/usr/bin/env ruby
+
+# frozen_string_literal: true
+
+require "./lib/game"
+require "./lib/schedule"
+
+schedule = Schedule.new(zone: "Eastern Time (US & Canada)")
+
+FileUtils.mkdir_p("./_data")
+
+File.write("./_data/games.json", JSON.dump(schedule.as_json))
+File.write("./_data/teams.json", JSON.dump(schedule.teams))
+
+schedule.teams.each do |id, team|
+  slug = team[:name].downcase.tr(" ", "-")
+
+  FileUtils.mkdir_p("./teams/#{slug}")
+
+  File.write(
+    "./teams/#{slug}/index.html",
+    <<~TEMPLATE
+      ---
+      title: "#{team[:name]}"
+      permalink: "/#{slug}/"
+      ---
+
+      {% include team.html id="#{id}" %}
+    TEMPLATE
+  )
+end

@@ -128,7 +128,7 @@
   activeSections.forEach(function(section, index) {
     if (!section.querySelector("tr")) {
       return;
-    } else if (count > limit && window.location.pathname === "/hockey/") {
+    } else if (count > limit && window.location.pathname === "/") {
       return;
     }
 

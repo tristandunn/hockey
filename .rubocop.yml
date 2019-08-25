@@ -1,0 +1,18 @@
+require: rubocop-performance
+
+Documentation:
+  Enabled: false
+
+Layout/AlignHash:
+  EnforcedColonStyle: table
+  EnforcedHashRocketStyle: table
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/PercentLiteralDelimiters:
+  PreferredDelimiters:
+    "%w": "()"
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes

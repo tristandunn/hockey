@@ -1,5 +1,3 @@
-baseurl: "/hockey"
-
 compress_html:
   clippings: all
 
@@ -15,6 +13,8 @@ exclude:
   - Gemfile.lock
   - LICENSE
   - README.markdown
+  - bin
+  - lib
   - vendor
 
 sass:

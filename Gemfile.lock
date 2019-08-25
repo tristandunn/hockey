@@ -8,6 +8,7 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.6.0)
       public_suffix (>= 2.0.2, < 4.0)
+    ast (2.4.0)
     coffee-script (2.4.1)
       coffee-script-source
       execjs
@@ -87,6 +88,7 @@ GEM
     http_parser.rb (0.6.0)
     i18n (0.9.5)
       concurrent-ruby (~> 1.0)
+    jaro_winkler (1.5.3)
     jekyll (3.8.5)
       addressable (~> 2.4)
       colorator (~> 1.0)
@@ -209,16 +211,30 @@ GEM
       mini_portile2 (~> 2.4.0)
     octokit (4.14.0)
       sawyer (~> 0.8.0, >= 0.5.3)
+    parallel (1.17.0)
+    parser (2.6.3.0)
+      ast (~> 2.4.0)
     pathutil (0.16.2)
       forwardable-extended (~> 2.6)
     public_suffix (3.1.1)
+    rainbow (3.0.0)
     rake (12.3.3)
     rb-fsevent (0.10.3)
     rb-inotify (0.10.0)
       ffi (~> 1.0)
     rouge (2.2.1)
+    rubocop (0.74.0)
+      jaro_winkler (~> 1.5.1)
+      parallel (~> 1.10)
+      parser (>= 2.6)
+      rainbow (>= 2.2.2, < 4.0)
+      ruby-progressbar (~> 1.7)
+      unicode-display_width (>= 1.4.0, < 1.7)
+    rubocop-performance (1.4.1)
+      rubocop (>= 0.71.0)
     ruby-enum (0.7.2)
       i18n
+    ruby-progressbar (1.10.1)
     ruby_dep (1.5.0)
     rubyzip (1.2.3)
     safe_yaml (1.0.5)
@@ -247,7 +263,9 @@ PLATFORMS
 
 DEPENDENCIES
   github-pages
+  rubocop (= 0.74.0)
+  rubocop-performance (= 1.4.1)
   scss_lint (= 0.58.0)
 
 BUNDLED WITH
-   2.0.2
+   2.0.1
