@@ -94,6 +94,12 @@
       return false;
     }
 
+    if (!section.querySelector("table tbody")) {
+      section.parentNode.removeChild(section);
+
+      return false;
+    }
+
     var parts        = time.getAttribute("datetime").split("-"),
         sectionYear  = parseInt(parts[0], 10),
         sectionMonth = parseInt(parts[1], 10),
