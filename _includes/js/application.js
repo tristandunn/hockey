@@ -101,7 +101,7 @@
 
     return (sectionYear >  year) ||
            (sectionYear >= year && sectionMonth >  month) ||
-           (sectionYear >= year && sectionMonth >= month && sectionDay >= day);
+           (sectionYear >= year && sectionMonth >= month && sectionDay >= day - 1);
   });
 
   if (activeSections.length === 0) {

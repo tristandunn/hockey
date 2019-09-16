@@ -33,7 +33,9 @@
         {% for game in games %}
           <tr>
           <th>
-            {% if game.start contains "03:00:00 -0400" or game.start contains "02:00:00 -0400" or game.start contains "01:00:00 -0400" %}
+            {% if game.complete %}
+              {{ game.away.score }} &#8211; {{ game.home.score }}
+            {% elsif game.start contains "03:00:00 -0400" or game.start contains "02:00:00 -0400" or game.start contains "01:00:00 -0400" %}
               TBD
             {% else %}
               <time datetime="{{ game.start | date: "%FT%T%:z" }}">
@@ -42,8 +44,8 @@
             {% endif %}
           </th>
           <td>
-            {% assign away_name = site.data.teams[game.away].name %}
-            {% assign home_name = site.data.teams[game.home].name %}
+            {% assign away_name = site.data.teams[game.away.id].name %}
+            {% assign home_name = site.data.teams[game.home.id].name %}
 
             <a href="{{ site.baseurl }}/{{ away_name | slugify }}/">{{ away_name }}</a>
             <span>@</span>

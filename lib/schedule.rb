@@ -46,7 +46,7 @@ class Schedule
   #
   # @return [Date]
   def start_date
-    Date.current
+    Date.current - 1.day
   end
 
   # Return the unique teams, sorted by their ID.
@@ -55,11 +55,13 @@ class Schedule
   def teams
     @teams ||= games.each_with_object({}) do |(_, games), result|
       games.each do |game|
-        away_team = game.away_team
-        home_team = game.home_team
+        away_team = game.away
+        home_team = game.home
 
-        result[away_team[:id]] ||= { name: away_team[:teamName] }
-        result[home_team[:id]] ||= { name: home_team[:teamName] }
+        result[away_team.dig(:team, :id)] ||=
+          { name: away_team.dig(:team, :teamName) }
+        result[home_team.dig(:team, :id)] ||=
+          { name: home_team.dig(:team, :teamName) }
       end
     end.sort.to_h
   end

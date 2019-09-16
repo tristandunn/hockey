@@ -11,8 +11,12 @@ class Game
   # Extract the away team data.
   #
   # @return [Hash]
-  def away_team
-    @away_team ||= @data.dig(:teams, :away, :team)
+  def away
+    @away ||= @data.dig(:teams, :away)
+  end
+
+  def complete?
+    @data.dig(:status, :abstractGameState) == FINAL_STATE
   end
 
   # Return the date of the game.
@@ -25,8 +29,8 @@ class Game
   # Extract the home team data.
   #
   # @return [Hash]
-  def home_team
-    @home_team ||= @data.dig(:teams, :home, :team)
+  def home
+    @home ||= @data.dig(:teams, :home)
   end
 
   # Extract and parse the game time.
@@ -40,9 +44,8 @@ class Game
   #
   # @return [Boolean]
   def valid?
-    away_team[:id] < MAXIMUM_TEAM_ID &&
-      home_team[:id] < MAXIMUM_TEAM_ID &&
-      @data.dig(:status, :detailedState) != FINAL_STATE
+    away.dig(:team, :id) < MAXIMUM_TEAM_ID &&
+      home.dig(:team, :id) < MAXIMUM_TEAM_ID
   end
 
   # Return the game as JSON.
@@ -50,9 +53,10 @@ class Game
   # @return [Hash]
   def as_json
     {
-      away:  away_team[:id].to_s,
-      home:  home_team[:id].to_s,
-      start: time
+      away:     { id: away.dig(:team, :id).to_s, score: away.dig(:score) },
+      home:     { id: home.dig(:team, :id).to_s, score: home.dig(:score) },
+      start:    time,
+      complete: complete?
     }
   end
 end
