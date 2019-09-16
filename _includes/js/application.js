@@ -149,6 +149,8 @@
 
       if (sectionYear === year && sectionMonth === month && sectionDay === day) {
         time.innerText = "Today";
+      } else if (sectionYear === year && sectionMonth === month && sectionDay === day - 1) {
+        time.innerText = "Yesterday";
       } else {
         time.innerText = Time.formatDate(
           new Date(time.getAttribute("datetime"))
