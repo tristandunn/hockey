@@ -180,7 +180,7 @@
         return;
       }
 
-      if (confirm("An updated schedule is available. Load it?")) {
+      if (window.scrollY === 0 || confirm("An updated schedule is available. Load it?")) {
         window.location.reload();
       }
     }, false);
