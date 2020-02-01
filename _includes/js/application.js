@@ -100,14 +100,16 @@
       return false;
     }
 
-    var parts        = time.getAttribute("datetime").split("-"),
-        sectionYear  = parseInt(parts[0], 10),
-        sectionMonth = parseInt(parts[1], 10),
-        sectionDay   = parseInt(parts[2].split("T")[0], 10);
+    var parts         = time.getAttribute("datetime").split("-"),
+        sectionYear   = parseInt(parts[0], 10),
+        sectionMonth  = parseInt(parts[1], 10),
+        sectionDay    = parseInt(parts[2].split("T")[0], 10),
+        previousMonth = month === 1 ? 12 : month - 1;
 
     return (sectionYear >  year) ||
            (sectionYear >= year && sectionMonth >  month) ||
-           (sectionYear >= year && sectionMonth >= month && sectionDay >= day - 1);
+           (sectionYear >= year && sectionMonth >= month && sectionDay >= day - 1) ||
+           (sectionYear >= year && sectionMonth === previousMonth && day === 1);
   });
 
   if (activeSections.length === 0) {
