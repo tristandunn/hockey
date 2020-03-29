@@ -2,15 +2,15 @@
 
 source "https://rubygems.org"
 
-gem "actionview",    "6.0.2.1"
-gem "activesupport", "6.0.2.1"
+gem "actionview",    "6.0.2.2"
+gem "activesupport", "6.0.2.2"
 gem "jekyll",        "4.0.0"
 
 group :development do
-  gem "rubocop",             "0.74.0", require: false
-  gem "rubocop-performance", "1.4.1",  require: false
+  gem "rubocop",             "0.80.1", require: false
+  gem "rubocop-performance", "1.5.2",  require: false
 end
 
 group :development, :test do
-  gem "scss_lint", "0.58.0", require: false
+  gem "scss_lint", "0.59.0", require: false
 end
