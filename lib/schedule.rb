@@ -42,6 +42,13 @@ class Schedule
     end.select(&:valid?).group_by(&:date)
   end
 
+  # Return if all games are postponed or not.
+  #
+  # @return [Boolean]
+  def postponed?
+    games.values.flatten.all?(&:postponed?)
+  end
+
   # Determine the starting date to query for.
   #
   # @return [Date]

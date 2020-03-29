@@ -2,9 +2,15 @@
 ---
 
 <main>
-  <section class="empty hidden">
-    <h1>No games scheduled&#8230;</h1>
-  </section>
+  {% if site.data.games == "POSTPONED" %}
+    <section class="empty postponed hidden">
+      <h1>Hockey is postponed.</h1>
+    </section>
+  {% else %}
+    <section class="empty hidden">
+      <h1>No games scheduled&#8230;</h1>
+    </section>
+  {% endif %}
 
   {% for object in site.data.games %}
     {% assign games = object[1] | sortBy:"start" %}

@@ -22,7 +22,12 @@ puts "Writing data..."
 
 FileUtils.mkdir_p("./_data")
 
-File.write("./_data/games.json", JSON.dump(schedule.as_json))
+if schedule.postponed?
+  File.write("./_data/games.json", JSON.dump("POSTPONED"))
+else
+  File.write("./_data/games.json", JSON.dump(schedule.as_json))
+end
+
 File.write("./_data/teams.json", JSON.dump(schedule.teams))
 
 puts "Generating team templates..."
