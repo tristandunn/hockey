@@ -2,9 +2,9 @@
 
 source "https://rubygems.org"
 
-gem "actionview",    "6.0.2.2"
-gem "activesupport", "6.0.2.2"
-gem "jekyll",        "4.0.0"
+gem "actionview",    "6.0.3.1"
+gem "activesupport", "6.0.3.1"
+gem "jekyll",        "4.1.0"
 
 group :development do
   gem "rubocop",             "0.80.1", require: false
