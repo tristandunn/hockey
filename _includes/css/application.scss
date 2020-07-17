@@ -26,11 +26,20 @@ body {
   text-rendering: optimizeLegibility;
   font-feature-settings: "kern";
   -webkit-font-smoothing: antialiased;
+
+  @media (prefers-color-scheme: dark) {
+    background: $black;
+    color: $white;
+  }
 }
 
 a {
   color: $black;
   text-decoration: none;
+
+  @media (prefers-color-scheme: dark) {
+    color: $white;
+  }
 }
 
 header {
@@ -72,9 +81,13 @@ section {
   }
 
   h1 {
-    color: $gray;
     font-size: 3.5vw;
     font-weight: 300;
+    opacity: 0.5;
+
+    @media (prefers-color-scheme: dark) {
+      color: $white;
+    }
   }
 
   table {
@@ -88,6 +101,10 @@ section {
     font-weight: 200;
     text-align: right;
     opacity: 0.66;
+
+    @media (prefers-color-scheme: dark) {
+      color: $white;
+    }
   }
 
   td {
@@ -96,6 +113,10 @@ section {
 
     a:hover {
       color: $blue;
+
+      @media (prefers-color-scheme: dark) {
+        color: $yellow;
+      }
     }
 
     span {
@@ -112,9 +133,19 @@ footer {
     color: $black;
     border-bottom: 0.1rem solid $gray;
 
+    @media (prefers-color-scheme: dark) {
+      color: $white;
+      border-bottom-color: rgba($white, 0.5);
+    }
+
     &:hover {
       color: $blue;
       border-color: $blue;
+
+      @media (prefers-color-scheme: dark) {
+        color: $yellow;
+        border-color: $yellow;
+      }
     }
   }
 
@@ -123,14 +154,21 @@ footer {
     line-height: 2.25;
 
     + p {
+      opacity: 0.5;
+
       &,
       a {
-        color: $gray;
-        border-color: $silver;
+        color: $black;
+        border-color: $black;
+
+        @media (prefers-color-scheme: dark) {
+          color: $white;
+          border-color: $white;
+        }
       }
 
       + p {
-        color: $silver;
+        opacity: 0.25;
       }
     }
   }
