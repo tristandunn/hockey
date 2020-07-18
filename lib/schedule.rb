@@ -77,8 +77,8 @@ class Schedule
   #
   # @return [Hash]
   def as_json
-    games.each_with_object({}) do |(date, games), result|
-      result[date] = games.sort_by(&:time).map(&:as_json)
+    games.transform_values do |games|
+      games.sort_by(&:time).map(&:as_json)
     end
   end
 
