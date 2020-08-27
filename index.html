@@ -20,10 +20,6 @@
       {% assign day = date | date: "%-d" %}
 
       <h1>
-        {% if date contains "03:00:00 -0400" or date contains "02:00:00 -0400" or date contains "01:00:00 -0400" %}
-          {% assign date = date | date: "%s" | plus: 86400 | date: "%F" %}
-        {% endif %}
-
         <time datetime="{{ date | date: "%FT%T%:z" }}">
           {{ date | date: "%B" }}
           {% case day %}
@@ -45,8 +41,10 @@
           <th>
             {% if game.complete %}
               {{ game.away.score }} &#8211; {{ game.home.score }}
-            {% elsif game.start contains "03:00:00 -0400" or game.start contains "02:00:00 -0400" or game.start contains "01:00:00 -0400" %}
+            {% elsif game.tbd %}
               TBD
+            {% elsif game.postponed %}
+              PPD
             {% else %}
               <time datetime="{{ game.start | date: "%FT%T%:z" }}">
                 {{ game.start | date:"%l:%M %p" }}

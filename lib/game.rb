@@ -4,6 +4,7 @@ class Game
   COMPLETE_STATE  = "Final"
   MAXIMUM_TEAM_ID = 100
   POSTPONED_STATE = "Postponed"
+  TBD_STATE = "Scheduled (Time TBD)"
 
   def initialize(data)
     @data = data.deep_symbolize_keys.slice(:gameDate, :teams, :status)
@@ -44,11 +45,26 @@ class Game
     @data.dig(:status, :detailedState) == POSTPONED_STATE
   end
 
+  # Return if the game time is to be determined.
+  #
+  # @return [Boolean]
+  def tbd?
+    @data.dig(:status, :detailedState) == TBD_STATE
+  end
+
   # Extract and parse the game time.
   #
   # @return [Time]
   def time
-    @time ||= Time.zone.parse(@data[:gameDate])
+    @time ||= begin
+      time = Time.zone.parse(@data[:gameDate])
+
+      if tbd?
+        time.to_date
+      else
+        time
+      end
+    end
   end
 
   # Determine if the game is valid.
@@ -68,7 +84,8 @@ class Game
       home:      { id: home.dig(:team, :id).to_s, score: home.dig(:score) },
       start:     time,
       complete:  complete?,
-      postponed: postponed?
+      postponed: postponed?,
+      tbd:       tbd?
     }
   end
 end
