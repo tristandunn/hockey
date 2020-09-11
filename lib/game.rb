@@ -80,8 +80,8 @@ class Game
   # @return [Hash]
   def as_json
     {
-      away:      { id: away.dig(:team, :id).to_s, score: away.dig(:score) },
-      home:      { id: home.dig(:team, :id).to_s, score: home.dig(:score) },
+      away:      { id: away.dig(:team, :id).to_s, score: away[:score] },
+      home:      { id: home.dig(:team, :id).to_s, score: home[:score] },
       start:     time,
       complete:  complete?,
       postponed: postponed?,
