@@ -45,6 +45,19 @@ class Game
     @data.dig(:status, :detailedState) == POSTPONED_STATE
   end
 
+  # Extract and parse the game time.
+  #
+  # If the game time is TBD, the time is removed and returned in UTC.
+  #
+  # @return [Time]
+  def start
+    @start ||= begin
+      time = Time.zone.parse(@data[:gameDate])
+      time = time.to_date.in_time_zone("UTC") if tbd?
+      time
+    end
+  end
+
   # Return if the game time is to be determined.
   #
   # @return [Boolean]
@@ -52,19 +65,11 @@ class Game
     @data.dig(:status, :detailedState) == TBD_STATE
   end
 
-  # Extract and parse the game time.
+  # Return the start time in the Eastern time zone.
   #
   # @return [Time]
   def time
-    @time ||= begin
-      time = Time.zone.parse(@data[:gameDate])
-
-      if tbd?
-        time.to_date
-      else
-        time
-      end
-    end
+    @time ||= start.in_time_zone(Time.zone)
   end
 
   # Determine if the game is valid.
@@ -82,10 +87,11 @@ class Game
     {
       away:      { id: away.dig(:team, :id).to_s, score: away[:score] },
       home:      { id: home.dig(:team, :id).to_s, score: home[:score] },
-      start:     time,
+      start:     start,
       complete:  complete?,
       postponed: postponed?,
-      tbd:       tbd?
+      tbd:       tbd?,
+      time:      time
     }
   end
 end
