@@ -7,7 +7,7 @@ class Game
   TBD_STATE = "Scheduled (Time TBD)"
 
   def initialize(data)
-    @data = data.deep_symbolize_keys.slice(:gameDate, :teams, :status)
+    @data = data.deep_symbolize_keys.slice(:gameDate, :gamePk, :teams, :status)
   end
 
   # Extract the away team data.
@@ -36,6 +36,13 @@ class Game
   # @return [Hash]
   def home
     @home ||= @data.dig(:teams, :home)
+  end
+
+  # Return an identifer for the game.
+  #
+  # @return [String]
+  def id
+    @data[:gamePk]
   end
 
   # Return if the game is postponed or not.
@@ -91,7 +98,8 @@ class Game
       complete:  complete?,
       postponed: postponed?,
       tbd:       tbd?,
-      time:      time
+      time:      time,
+      uid:       id
     }
   end
 end
