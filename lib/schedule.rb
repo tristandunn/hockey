@@ -88,9 +88,7 @@ class Schedule
   #
   # @return [Hash]
   def dates
-    @dates ||= begin
-                 JSON.parse(uri.read)["dates"]
-               end
+    @dates ||= JSON.parse(uri.read)["dates"]
   end
 
   # Build the request query.
