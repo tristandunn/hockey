@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:https://hockey.mademinimal.com
+X-WR-CALNAME:{{ site.data.teams[include.id].name }}
+METHOD:PUBLISH{% for object in site.data.games %}{% assign games = object[1] | sortBy:"start" %}{% for game in games %}{% if include.id %}{% if include.id == game.away.id or include.id == game.home.id %}{% else %}{% continue %}{% endif %}{% endif %}{% assign home_name = site.data.teams[game.home.id].name %}{% assign away_name = site.data.teams[game.away.id].name %}
+BEGIN:VEVENT
+UID:{{ game.start | date: "%Y%m%d" }}@hockey.mademinimal.com
+LOCATION:{% if include.id == game.home.id %}Home{% else %}Away{% endif %}
+SUMMARY:{{ away_name }} @ {{ home_name }}{% if game.tbd %}
+DESCRIPTION:Time to be determined.{% endif %}
+CLASS:PUBLIC
+{% if game.tbd %}DTSTART;VALUE=DATE:{{ game.time | date: "%Y%m%d" }}{% else %}DTSTART:{{ game.time | date: "%Y%m%dT%H%M%SZ" }}
+DTEND:{{ game.time | date: "%s" | plus: 10800 | date: "%Y%m%dT%H%M%SZ" }}{% endif %}
+DTSTAMP:{{ game.time | date: "%Y%m%dT%H%M%SZ" }}
+END:VEVENT{% endfor %}{% endfor %}
+END:VCALENDAR

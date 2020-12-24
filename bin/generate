@@ -44,8 +44,18 @@ schedule.teams.each do |id, team|
       title: "#{team[:name]}"
       permalink: "/#{slug}/"
       ---
-
       {% include team.html id="#{id}" %}
+    TEMPLATE
+  )
+
+  File.write(
+    "./teams/#{slug}/schedule.ics",
+    <<~TEMPLATE
+      ---
+      layout: null
+      permalink: "/#{slug}.ics"
+      ---
+      {% include team.ics id="#{id}" %}
     TEMPLATE
   )
 end
