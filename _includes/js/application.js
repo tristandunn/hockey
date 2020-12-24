@@ -170,23 +170,4 @@
 
     section.classList.add("week");
   });
-
-
-
-
-  window.addEventListener("load", function(e) {
-    if (!window.applicationCache) {
-      return;
-    }
-
-    window.applicationCache.addEventListener("updateready", function(e) {
-      if (window.applicationCache.status !== window.applicationCache.UPDATEREADY) {
-        return;
-      }
-
-      if (window.scrollY === 0 || confirm("An updated schedule is available. Load it?")) {
-        window.location.reload();
-      }
-    }, false);
-  }, false);
 })();
