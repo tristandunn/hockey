@@ -7,6 +7,10 @@ Layout/HashAlignment:
   EnforcedColonStyle: table
   EnforcedHashRocketStyle: table
 
+Metrics/AbcSize:
+  IgnoredMethods:
+    - as_json
+
 Style/Documentation:
   Enabled: false
 

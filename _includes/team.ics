@@ -9,8 +9,8 @@ LOCATION:{% if include.id == game.home.id %}Home{% else %}Away{% endif %}
 SUMMARY:{{ away_name }} @ {{ home_name }}{% if game.tbd %}
 DESCRIPTION:Time to be determined.{% endif %}
 CLASS:PUBLIC
-{% if game.tbd %}DTSTART;VALUE=DATE:{{ game.time | date: "%Y%m%d" }}{% else %}DTSTART:{{ game.time | date: "%Y%m%dT%H%M%SZ" }}
-DTEND:{{ game.time | date: "%s" | plus: 10800 | date: "%Y%m%dT%H%M%SZ" }}{% endif %}
-DTSTAMP:{{ game.time | date: "%Y%m%dT%H%M%SZ" }}
+{% if game.tbd %}DTSTART;VALUE=DATE:{{ game.date | date: "%Y%m%d" }}{% else %}DTSTART:{{ game.utc.start | date: "%Y%m%dT%H%M%SZ" }}
+DTEND:{{ game.utc.end | date: "%Y%m%dT%H%M%SZ" }}{% endif %}
+DTSTAMP:{{ game.utc.start | date: "%Y%m%dT%H%M%SZ" }}
 END:VEVENT{% endfor %}{% endfor %}
 END:VCALENDAR

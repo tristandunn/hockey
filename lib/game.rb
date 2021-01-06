@@ -28,7 +28,7 @@ class Game
   #
   # @return [Date]
   def date
-    @date ||= time.to_date
+    @date ||= start.to_date
   end
 
   # Extract the home team data.
@@ -72,13 +72,6 @@ class Game
     @data.dig(:status, :detailedState) == TBD_STATE
   end
 
-  # Return the start time in the Eastern time zone.
-  #
-  # @return [Time]
-  def time
-    @time ||= start.in_time_zone(Time.zone)
-  end
-
   # Determine if the game is valid.
   #
   # @return [Boolean]
@@ -98,8 +91,8 @@ class Game
       complete:  complete?,
       postponed: postponed?,
       tbd:       tbd?,
-      time:      time,
-      uid:       id
+      uid:       id,
+      utc:       { start: start.utc, end: start.utc + 3.hours }
     }
   end
 end
