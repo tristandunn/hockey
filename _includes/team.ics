@@ -2,7 +2,7 @@ BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:https://hockey.mademinimal.com
 X-WR-CALNAME:{{ site.data.teams[include.id].name }}
-METHOD:PUBLISH{% for object in site.data.games %}{% assign games = object[1] | sortBy:"start" %}{% for game in games %}{% if include.id %}{% if include.id == game.away.id or include.id == game.home.id %}{% else %}{% continue %}{% endif %}{% endif %}{% assign home_name = site.data.teams[game.home.id].name %}{% assign away_name = site.data.teams[game.away.id].name %}
+METHOD:PUBLISH{% for object in site.data.games %}{% assign games = object[1] | sortBy:"start" %}{% for game in games %}{% if game.postponed %}{% continue %}{% endif %}{% if include.id %}{% if include.id == game.away.id or include.id == game.home.id %}{% else %}{% continue %}{% endif %}{% endif %}{% assign home_name = site.data.teams[game.home.id].name %}{% assign away_name = site.data.teams[game.away.id].name %}
 BEGIN:VEVENT
 UID:{{ game.uid }}@hockey.mademinimal.com
 LOCATION:{% if include.id == game.home.id %}Home{% else %}Away{% endif %}
