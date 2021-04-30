@@ -7,8 +7,9 @@ gem "activesupport", "6.1.3.1"
 gem "jekyll",        "4.2.0"
 
 group :development do
-  gem "rubocop",             "1.12.0", require: false
-  gem "rubocop-performance", "1.10.2", require: false
+  gem "rubocop",             "1.13.0", require: false
+  gem "rubocop-performance", "1.11.0", require: false
+  gem "webrick",             "1.7.0"
 end
 
 group :development, :test do
