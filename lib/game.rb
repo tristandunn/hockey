@@ -58,11 +58,7 @@ class Game
   #
   # @return [Time]
   def start
-    @start ||= begin
-      time = Time.zone.parse(@data[:gameDate])
-      time = time.to_date.in_time_zone("UTC") if tbd?
-      time
-    end
+    @start ||= Time.zone.parse(@data[:gameDate])
   end
 
   # Return if the game time is to be determined.
