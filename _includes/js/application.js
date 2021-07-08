@@ -116,7 +116,7 @@
     if (!empty.classList.contains("postponed")) {
       var header     = empty.querySelector("h1"),
           difference = Math.round(
-            (new Date("9/16/2019").getTime() - Date.now()) /
+            (new Date("9/22/2021").getTime() - Date.now()) /
             1000 / 60 / 60 / 24
           ),
           duration   = "in " + difference + " days";
