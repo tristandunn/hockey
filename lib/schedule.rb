@@ -46,7 +46,7 @@ class Schedule
   #
   # @return [Boolean]
   def postponed?
-    games.values.flatten.all?(&:postponed?)
+    !games.empty? && games.values.flatten.all?(&:postponed?)
   end
 
   # Determine the starting date to query for.
