@@ -1,3 +1,7 @@
+<header>
+  <h1><a href="{{ site.baseurl }}/">{{ include.id | team_id_to_emoji }}</a></h1>
+</header>
+
 <main>
   {% for object in site.data.games %}
     {% assign games = object[1] | sortBy:"start" %}
