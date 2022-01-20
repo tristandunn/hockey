@@ -47,6 +47,8 @@
               <time datetime="{{ game.start | date: "%FT%T%:z" }}">
                 {{ game.start | date:"%l:%M %p" }}
               </time>
+
+              <span class="networks">{{ game.networks | join: ", " }}</span>
             {% endif %}
           </th>
           <td>

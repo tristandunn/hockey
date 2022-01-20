@@ -105,11 +105,20 @@ section {
     @media (prefers-color-scheme: dark) {
       color: $white;
     }
+
+    .networks {
+      max-width: 16vw;
+      margin-top: -1vw;
+      font-size: 1.5vw;
+      font-weight: 300;
+      display: block;
+    }
   }
 
   td {
     padding: 0 0 0 2vw;
     font-weight: 800;
+    vertical-align: top;
 
     a:hover {
       color: $blue;

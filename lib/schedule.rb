@@ -96,7 +96,7 @@ class Schedule
   # @return [String]
   def query
     {
-      hydrate:   "team",
+      hydrate:   "team,broadcasts(all)",
       endDate:   end_date,
       startDate: start_date
     }.to_query

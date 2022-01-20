@@ -11,6 +11,10 @@ Metrics/AbcSize:
   IgnoredMethods:
     - as_json
 
+Metrics/MethodLength:
+  IgnoredMethods:
+    - as_json
+
 Style/Documentation:
   Enabled: false
 

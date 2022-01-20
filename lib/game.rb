@@ -7,7 +7,7 @@ class Game
   TBD_STATE = "Scheduled (Time TBD)"
 
   def initialize(data)
-    @data = data.deep_symbolize_keys.slice(:gameDate, :gamePk, :teams, :status)
+    @data = data.deep_symbolize_keys.slice(:broadcasts, :gameDate, :gamePk, :teams, :status)
   end
 
   # Extract the away team data.
@@ -15,6 +15,15 @@ class Game
   # @return [Hash]
   def away
     @away ||= @data.dig(:teams, :away)
+  end
+
+  # Return the TV networks for the game.
+  #
+  # @return [Array]
+  def networks
+    Array(@data[:broadcasts]).map do |broadcast|
+      broadcast[:name]
+    end.sort
   end
 
   # Return if the game is complete or not.
@@ -85,6 +94,7 @@ class Game
       home:      { id: home.dig(:team, :id).to_s, score: home[:score] },
       start:     start,
       complete:  complete?,
+      networks:  networks,
       postponed: postponed?,
       tbd:       tbd?,
       uid:       id,
