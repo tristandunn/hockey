@@ -2,13 +2,13 @@
 
 source "https://rubygems.org"
 
-gem "actionview",    "7.0.1"
-gem "activesupport", "7.0.1"
+gem "actionview",    "7.0.2.2"
+gem "activesupport", "7.0.2.2"
 gem "jekyll",        "4.2.1"
 
 group :development do
-  gem "rubocop",             "1.24.1", require: false
-  gem "rubocop-performance", "1.13.1", require: false
+  gem "rubocop",             "1.25.1", require: false
+  gem "rubocop-performance", "1.13.2", require: false
   gem "webrick",             "1.7.0"
 end
 
