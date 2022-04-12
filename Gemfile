@@ -7,7 +7,7 @@ gem "activesupport", "7.0.2.3"
 gem "jekyll",        "4.2.2"
 
 group :development do
-  gem "rubocop",             "1.26.1", require: false
+  gem "rubocop",             "1.27.0", require: false
   gem "rubocop-performance", "1.13.3", require: false
   gem "webrick",             "1.7.0"
 end
