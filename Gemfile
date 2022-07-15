@@ -2,8 +2,8 @@
 
 source "https://rubygems.org"
 
-gem "actionview",    "7.0.3"
-gem "activesupport", "7.0.3"
+gem "actionview",    "7.0.3.1"
+gem "activesupport", "7.0.3.1"
 gem "jekyll",        "4.2.2"
 
 group :development do
