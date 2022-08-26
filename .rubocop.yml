@@ -8,11 +8,11 @@ Layout/HashAlignment:
   EnforcedHashRocketStyle: table
 
 Metrics/AbcSize:
-  IgnoredMethods:
+  AllowedMethods:
     - as_json
 
 Metrics/MethodLength:
-  IgnoredMethods:
+  AllowedMethods:
     - as_json
 
 Style/Documentation:
