@@ -4,11 +4,11 @@ source "https://rubygems.org"
 
 gem "actionview",    "7.0.4"
 gem "activesupport", "7.0.4"
-gem "jekyll",        "4.3.0"
+gem "jekyll",        "4.3.1"
 
 group :development do
-  gem "rubocop",             "1.37.1", require: false
-  gem "rubocop-performance", "1.15.0", require: false
+  gem "rubocop",             "1.39.0", require: false
+  gem "rubocop-performance", "1.15.1", require: false
 end
 
 group :development, :test do
