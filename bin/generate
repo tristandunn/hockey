@@ -33,6 +33,8 @@ File.write("./_data/teams.json", JSON.dump(schedule.teams))
 puts "Generating team templates..."
 
 schedule.teams.each do |id, team|
+  next if team[:name].nil?
+
   slug = team[:name].downcase.tr(" ", "-")
 
   FileUtils.mkdir_p("./teams/#{slug}")
