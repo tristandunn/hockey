@@ -3,21 +3,19 @@ name: CI
 on: [push]
 
 jobs:
-  build:
+  Linting:
     runs-on: ubuntu-latest
 
-    name: Build and lint
     steps:
-      - uses: actions/checkout@v3
-      - uses: ruby/setup-ruby@v1
+      - name: Checkout the code
+        uses: actions/checkout@v3
+      - name: Install Ruby
+        uses: ruby/setup-ruby@v1
         with:
-          ruby-version: "3.2.2"
           bundler-cache: true
-      - name: Build the site and lint the CSS
-        run: |
-          gem install bundler
-          bundle config path vendor/bundle
-          bundle install --jobs 4 --retry 3
-          bundle exec jekyll build --verbose
-          bundle exec rubocop
-          bundle exec scss-lint
+      - name: Build the Site
+        run: bundle exec jekyll build --verbose
+      - name: Lint the Ruby
+        run: bundle exec rubocop
+      - name: Lint the CSS
+        run: bundle exec scss-lint
