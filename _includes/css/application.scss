@@ -3,20 +3,6 @@ body {
   height: 100%;
 }
 
-html {
-  font-size: 90%;
-
-  // Scales by 1px for every 100px from 600px onwards
-  @media (min-width: 600px) {
-    font-size: calc(112.5% + 4 * (100vw - 600px) / 400);
-  }
-
-  // Sets font-size to 22px after a viewport of 1000px
-  @media (min-width: 1000px) {
-    font-size: 137.5%;
-  }
-}
-
 body {
   background: $white;
   color: $black;
@@ -46,12 +32,8 @@ header {
   padding: 4vw;
 
   h1 {
-    font-size: 7vw;
+    font-size: clamp(2rem, 7vw, 6rem);
     text-align: center;
-
-    @media (min-width: 1024px) {
-      font-size: 125px;
-    }
   }
 }
 
@@ -77,11 +59,11 @@ section {
   }
 
   + section {
-    padding-top: 6vw;
+    padding-top: clamp(1rem, 6vw, 3rem);
   }
 
   h1 {
-    font-size: 3.5vw;
+    font-size: clamp(1rem, 3.5vw, 2rem);
     font-weight: 300;
     opacity: 0.5;
 
@@ -91,9 +73,9 @@ section {
   }
 
   table {
-    margin: 1vw 0 0;
-    font-size: 4.25vw;
-    line-height: 1.5;
+    margin: 1rem 0 0;
+    font-size: clamp(1rem, 4.25vw, 3rem);
+    line-height: 1.33;
   }
 
   th {
@@ -108,8 +90,7 @@ section {
 
     .networks {
       max-width: 16vw;
-      margin-top: -1vw;
-      font-size: 1.5vw;
+      font-size: clamp(0.5rem, 1.5vw, 1rem);
       font-weight: 300;
       display: block;
     }
